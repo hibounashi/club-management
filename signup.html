@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration form</title>
+    <link rel="stylesheet" href="signup.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<!--notes: 
+if i want to make more improvement it will be the below:
+    1- costumise select elemente + icon
+    2- make the left part in the center of her height
+-->
+<body>
+    <div class="container">
+        <!-- left part -->
+        <div class="login-link">
+            <div class="logo">
+                <i class='bx bx-pencil' ></i>
+                <span class="text">club management</span>
+            </div>
+            <p class="side-big-heading">Already a member ?</p>
+            <p class="primary-bg-text">To keep track on your dashboard please login with your personal info</p>
+            <a href="login.html" class="loginbtn">Login</a>
+        </div>
+
+        <!-- form part -->
+        <form action="" class="signup-form-container">
+            <p class="big-heading">Create Account</p>
+            <div class="progress-bar">
+                <div class="stage">
+                    <p class="tool-tip">Personal info</p>
+                    <p class="stageno stageno-1">1</p>
+                </div>
+                <div class="stage">
+                    <p class="tool-tip">Contact info</p>
+                    <p class="stageno stageno-2">2</p>
+                </div>
+                <div class="stage">
+                    <p class="tool-tip">Final Submit</p>
+                    <p class="stageno stageno-3">3</p>
+                </div>
+            </div>
+            <div class="signup-form-content">
+
+                <!-- page 1 -->
+                <div class="stage1-content">
+                    <div class="button-container">
+                        <div class="text-fields fname">
+                            <label for="fname"><i class='bx bx-user' ></i></label>
+                            <input type="text" name="fname" id="fname" placeholder="Enter your first name">
+                        </div>
+                        <div class="text-fields lname">
+                            <label for="lname"><i class='bx bx-user' ></i></label>
+                            <input type="text" name="lname" id="lname" placeholder="Enter your last name">
+                        </div>
+                    </div>
+                    <div class="button-container">
+                        <div class="text-fields dob">
+                            <input type="date" name="dob" id="dob">
+                        </div>
+                        <div class="gender-selection">
+                            <p class="field-heading">Gender : </p>
+                            <label for="male">
+                                <input type="radio" name="gender" id="male">Male
+                            </label>
+                            <label for="female"><input type="radio" name="gender" id="female">Female</label>
+                        </div>
+                    </div>
+                    <div class="pagination-btns">
+                        <input type="button" value="Next" class="nextPage stagebtn1b" onclick="stage1to2()">
+                    </div>
+                </div>
+
+            <!-- page 2 -->
+            <div class="stage2-content">
+            <div class="button-container">
+                <div class="text-fields discord">
+                    <label for="discord"><i class='bx bx-user' ></i></label>
+                    <input type="text" name="discord" id="discord" placeholder="enter your dicord id ">
+                </div>
+                <div class="text-fields email">
+                    <label for="email"><i class='bx bx-envelope' ></i></label>
+                    <input type="email" name="email" id="email" placeholder="Enter your email id">
+                </div>
+            </div>
+                <div class="button-container">
+                    <div class="text-fields password">
+                        <label for="password"><i class='bx bx-lock-alt' ></i></label>
+                        <input type="password" name="password" id="password" placeholder="Enter password">
+                    </div>
+                    <div class="text-fields confirmpassword">
+                        <label for="confirmpassword"><i class='bx bx-lock-alt' ></i></label>
+                        <input type="password" name="confirmpassword" id="confirmpassword" placeholder="Enter password">
+                    </div>
+                </div>
+                <div class="pagination-btns">
+                    <input type="button" value="Previous" class="previousPage stagebtn2a" onclick="stage2to1()">
+                    <input type="button" value="Next" class="nextPage stagebtn2b" onclick="stage2to3()">
+                </div>
+            </div>
+
+            <!-- page 3 -->
+            <div class="stage3-content">
+                <div class="button-container">
+                    <div class="text-fields school_year">
+                        <label for="school_year"><i class='bx bx-lock-alt' ></i></label>
+                        <input type="school_year" name="school_year" id="school_year" placeholder="Enter school year">
+                    </div>
+                    <div class="text-fields university">
+                        <label for="university"><i class='bx bx-lock-alt' ></i></label>
+                        <input type="university" name="university" id="university" placeholder="Enter university">
+                    </div>
+                </div>
+                <div class="button-container">
+                    <div class="text-fields skills">
+                        <label for="skills"><i class='bx bx-lock-alt' ></i></label>
+                        <input type="skills" name="skills" id="skills" placeholder="Enter skills">
+                    </div>
+                    <div class="text-fields departement">
+                        <label for="departement"><i class='bx'></i></label>
+                        <select name="departement" id="departement">
+                            <option value="" disabled selected>Select a department</option>
+                            <option value="logistics">logistic</option>
+                            <option value="development">development</option>
+                            <option value="communication">communication</option>
+                            <option value="design">design</option>
+                            <option value="relax">relation exterior</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="pagination-btns">
+                    <input type="button" value="Previous" class="previousPage stagebtn3a" onclick="stage3to2()">
+                    <input type="submit" value="Submit" class="nextPage stagebtn3b">
+                </div>
+            </div>
+            </div>
+            </div>
+        </form>
+    </div>
+</body>
+<!-- javascript code part -->
+<script src="signup.js"></script>
+<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+</html>
