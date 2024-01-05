@@ -1,0 +1,42 @@
+create database if not exist club_management
+use databse club_management
+
+
+CREATE TABLE Member (
+    memberID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    memeberName VARCHAR(50),
+    memeberLastName VARCHAR(50),
+    email VARCHAR(50) UNIQUE,
+    gender VARCHAR(20),
+    discord_id VARCHAR(20),
+    Dob DATE,
+    password VARCHAR(255) NOT NULL ,
+    yearOfStudy VARCHAR(10)
+);
+
+ALTER TABLE member;
+ ADD COLUMN departement VARCHAR(50),
+  ADD COLUMN university VARCHAR(50),
+   ADD COLUMN skills VARCHAR(50);
+   ADD COLUMN confirmpassword VARCHAR;
+
+
+
+CREATE TABLE Manager (
+    managerID INT PRIMARY KEY AUTO_INCREMENT,
+    managerName VARCHAR(50),
+    email VARCHAR(50) UNIQUE,
+    phone VARCHAR(20),
+    number_events INT
+);
+
+CREATE TABLE event (
+id_event INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+eventName VARCHAR(50),
+description VARCHAR(255)
+);
+
+CREATE TABLE departement(
+    departementID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    departementName VARCHAR(50)
+)

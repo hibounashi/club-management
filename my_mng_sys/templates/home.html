@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> 
 	<title>Admin</title>
 </head>
 <body>
@@ -146,16 +146,17 @@
 								</tr>
 							</thead>
 							<tbody>
+								{% for member in members %}
 								<tr>
 									<td>
 										<img src="img/people.png">
-										<p>John Doe</p>
+										<p>{{ member.memeberName }} {{ member.memeberLastName }}</p>
 									</td>
-									<td>J_doe@estin.dz</td>
-									<td>Developement</td>
-									<td>ESTIN</td>
-									<td>1CS</td>
-									<td>21 yo</td>
+									<td>{{ member.email }}</td>
+									<td>{{ member.departement }}</td>
+									<td>{{ member.departement }}</td>
+									<td>{{ member.yearOfStudy }}</td>
+									<td>{{ calculate_age(member.Dob) }}</td>
 									<td>
 										<i class='bx bx-edit-alt'></i>
 										<i class='bx bx-trash'></i>
@@ -164,7 +165,7 @@
 									
 									
 								</tr>
-								
+								{% endfor %}
 							</tbody>
 						</table>
 					</div>
@@ -182,6 +183,6 @@
 
 
 	<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-	<script src="script.js"></script>
+	<script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

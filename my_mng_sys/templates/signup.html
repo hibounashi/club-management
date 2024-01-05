@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration form</title>
-    <link rel="stylesheet" href="signup.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}"> 
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <!--notes: 
@@ -27,7 +27,7 @@ if i want to make more improvement it will be the below:
         </div>
 
         <!-- form part -->
-        <form action="" class="signup-form-container">
+        <form  class="signup-form-container" action="{{ url_for('signup') }}" method="POST" >
             <p class="big-heading">Create Account</p>
             <div class="progress-bar">
                 <div class="stage">
@@ -64,9 +64,11 @@ if i want to make more improvement it will be the below:
                         <div class="gender-selection">
                             <p class="field-heading">Gender : </p>
                             <label for="male">
-                                <input type="radio" name="gender" id="male">Male
+                                <input type="radio" name="gender" id="male" value="male">Male
                             </label>
-                            <label for="female"><input type="radio" name="gender" id="female">Female</label>
+                            <label for="female">
+                                <input type="radio" name="gender" id="female" value="female">Female
+                            </label>
                         </div>
                     </div>
                     <div class="pagination-btns">
@@ -119,6 +121,7 @@ if i want to make more improvement it will be the below:
                         <label for="skills"><i class='bx bx-lock-alt' ></i></label>
                         <input type="skills" name="skills" id="skills" placeholder="Enter skills">
                     </div>
+                    
                     <div class="text-fields departement">
                         <label for="departement"><i class='bx'></i></label>
                         <select name="departement" id="departement">
@@ -142,6 +145,6 @@ if i want to make more improvement it will be the below:
     </div>
 </body>
 <!-- javascript code part -->
-<script src="signup.js"></script>
+<script src="{{ url_for('static', filename='js/signup.js') }}"></script>
 <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 </html>
