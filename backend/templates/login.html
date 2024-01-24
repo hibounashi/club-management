@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <div class="container">
+        <!-- left part -->
+        <div class="login-link">
+            <div class="logo">
+                <i class='bx bx-pencil' ></i>
+                <span class="text">club management</span>
+            </div>
+            <p class="side-big-heading">Create your account</p>
+            <p class="primary-bg-text">To keep track on your dashboard please login with your personal info</p>
+            <a href="{{ url_for('signup') }}" class="loginbtn">Register now</a>
+        </div>
+        <!-- this is the form part -->
+        <form action="{{ url_for('login') }}" method="POST" class="signup-form-container">
+            <p class="big-heading">Login to your account</p>
+            <div class="login-form-contents">
+                <div class="text-fields email">
+                    <label for="email"><i class='bx bx-envelope' ></i></label>
+                    <input type="email" name="email" id="email" placeholder="Enter your email id">
+                </div>
+                <div class="text-fields password">
+                    <label for="password"><i class='bx bx-lock-alt' ></i></label>
+                    <input type="password" name="password" id="password" placeholder="Enter password">
+                </div>
+            </div>
+            <input type="submit" value="submit" class="nextPage">
+        </form>
+</body>
+<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+</html>
