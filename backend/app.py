@@ -125,7 +125,9 @@ def user_home():
         return redirect(url_for('login'))
     else:
         return render_template('home_user.html')
-
+@app.route('/profile')
+def profile():
+    return render_template('user_profile.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
