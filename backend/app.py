@@ -61,7 +61,6 @@ def login():
         email = request.form['email']
         password = request.form['password']
         
-        # i use DictCursor to retreive the table tuple in form of dictionory
         cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         cur.execute("SELECT * FROM Member WHERE email = %s AND password = %s", (email, password))
         user = cur.fetchone()
@@ -71,7 +70,11 @@ def login():
             # use session for the after login process
             session['member_id'] = user['memberID']
             session['member_email'] = user['email']
-            return redirect(url_for('home'))
+            print("Role from database:", user['role'])
+            if user['role'] == 'Manager':
+                return redirect(url_for('dashboard'))
+            else:
+                return redirect(url_for('user_home'))
     return render_template('login.html')
 
 @app.route('/logout')
@@ -80,9 +83,49 @@ def logout():
     session.pop('member_email', None)
     return redirect(url_for('login'))
 
+@app.route('/dashboard')
+def dashboard():
+    
+    if 'member_id' not in session:
+        return redirect(url_for('login'))
+    else:
+        cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cur.execute("SELECT * FROM Member WHERE memberID = %s", (session['member_id'],))
+        user = cur.fetchone()
+        #count the total number of users 
+        cur.execute("SELECT COUNT(*) AS user_count FROM Member")
+        user_count = cur.fetchone()['user_count']
+        #the percentage 
+        total_users = 250 #retrive it from discord server
+        registration_percentage = (user_count / total_users) * 100
+        #count the total number of events
+        cur.execute("SELECT COUNT(*) AS event_count FROM club_event")
+        event_count = cur.fetchone()['event_count']
+        #count the total number of events
+        cur.execute("SELECT COUNT(*) AS dep_count FROM departement")
+        dep_count = cur.fetchone()['dep_count']
+        #count the total count of members across all events
+        cur.execute("SELECT COUNT(DISTINCT m.memberID) AS event_members_count FROM club_event c JOIN participate p ON p.id_event = c.id_event JOIN member m ON m.memberID = p.member_id;")
+        event_members_count = cur.fetchone()['event_members_count']
+        #the percentage
+        active_member_percentage = ( event_members_count / user_count) * 100
+        cur.close()
+        return render_template(
+            'home_manager.html',
+            user=user,
+            user_count=user_count,
+            registration_percentage = registration_percentage,
+            event_count=event_count,
+            dep_count= dep_count,
+            event_members_count= event_members_count,
+            active_member_percentage = active_member_percentage)
 @app.route('/home')
-def home():
-    return render_template('home_manager.html')
+def user_home():
+    if 'member_id' not in session:
+        return redirect(url_for('login'))
+    else:
+        return render_template('home_user.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
