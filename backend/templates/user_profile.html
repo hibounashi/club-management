@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/user_profile.css') }}">
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 	<title>Profile</title>
 </head>
 <body>
@@ -37,7 +38,7 @@
 		<!-- NAVBAR -->
 		<nav>
 			<i class='bx bx-menu toggle-sidebar' ></i>
-			<form action="#">
+			<form>
 				<div class="form-group">
 					<input type="text" placeholder="Search...">
 					<i class='bx bx-search icon' ></i>
@@ -55,117 +56,141 @@
 			<div class="profile">
 				<img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cGVvcGxlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="">
 				<ul class="profile-link">
-					<li><a href="#"><i class='bx bxs-user-circle icon' ></i> Profile</a></li>
+					<li><a href="{{ url_for('profile') }}"><i class='bx bxs-user-circle icon' ></i> Profile</a></li>
 					<li><a href="#"><i class='bx bxs-cog' ></i> Settings</a></li>
-					<li><a href="#"><i class='bx bxs-log-out-circle' ></i> Logout</a></li>
+					<li><a href="{{ url_for('logout') }}"><i class='bx bxs-log-out-circle' ></i> Logout</a></li>
 				</ul>
 			</div>
 		</nav>
 		<!-- NAVBAR -->
 
+		
 		<!-- MAIN -->
 		<main>
 			<div class="head-title">
 				<div class="left">
-					
 					<img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cGVvcGxlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="">
-					<h2>ahmed Amine</h2>
+					<h2 id="username">{{ user.fname }} {{ user.lname }}</h2>
 				</div>
 
 				<div class="buttons">
-				<a href="#" class="btn-download">
-					<i class='bx bx-edit'></i>
-					<span class="text">Edit profile</span>
-				</a>
-				<a href="#" class="btn-join-date">
-					<i class='bx bxs-log-in'></i>
-					<span class="text">2021-05-12</span>
-				</a>	
+					<a href="#" id="editProfileBtn" class="btn-download">
+						<i class='bx bx-edit'></i>
+						<span class="text">Edit profile</span>
+					</a>
+					<form action="{{url_for('delete_user_profile')}}" method="POST">
+						<input type="hidden" name="_method" value="DELETE">
+						<button type="submit" class="btn-join-date">
+							<i class='bx bxs-log-in'></i>
+							<span class="text">Delete my account</span>
+						</button>
+					</form>	
 				</div>
-
 			</div>
 
-			<ul class="box-info">
-				<li>
-					<i class='bx bxs-calendar-check' ></i>
-					<span class="text">
-						<h3>1020</h3>
-						<p>Participated Events</p>
-					</span>
-				</li>
-				<li>
-					<i class='bx bxs-group' ></i>
-					<span class="text">
-						<h3>2834</h3>
-						<p>Rank</p>
-					</span>
-				</li>
-				<li>
-					<i class='bx bxs-dollar-circle' ></i>
-					<span class="text">
-						<h3>49%</h3>
-						<p>Score</p>
-					</span>
-				</li>
-			</ul>
+			<div id="profileInfo">
+				<!-- Display profile information -->
+				<ul class="box-info">
+					<li>
+						<i class='bx bxs-calendar-check' ></i>
+						<span class="text">
+							<h3>1020</h3>
+							<p>Participated Events</p>
+						</span>
+					</li>
+					<li>
+						<i class='bx bxs-group' ></i>
+						<span class="text">
+							<h3>2834</h3>
+							<p>Rank</p>
+						</span>
+					</li>
+					<li>
+						<i class='bx bxs-dollar-circle' ></i>
+						<span class="text">
+							<h3>49%</h3>
+							<p>Score</p>
+						</span>
+					</li>
+				</ul>
 
-
-			<div class="table-info">
-				<div class="table-data">
-					<div class="order">
-						<div class="head">
-							<h3>More Information</h3>
-							<i class='bx bx-search' ></i>
-							<i class='bx bx-filter' ></i>
+				<div class="table-info">
+					<div class="table-data">
+						<div class="order">
+							<div class="head">
+								<h3>More Information</h3>
+								<i class='bx bx-search' ></i>
+								<i class='bx bx-filter' ></i>
+							</div>
+							<table>
+								<tbody>
+									<tr>
+										<td><i class='bx bx-envelope'></i>
+										<h4>Email</h4></td>
+										<td>{{ user.email }}</td>
+									</tr>
+									<tr>
+										<td><i class='bx bxl-discord-alt'></i>
+											<h4>Discord</h4></td>
+										<td>{{ user.discord }}</td>
+									</tr>
+									<tr>
+										<td><i class='bx bx-briefcase'></i>
+											<h4>Skills</h4></td>
+										<td>{{ user.skills }}</td>
+									</tr>
+									<tr>
+										<td><i class='bx bx-grid-alt'></i>
+											<h4>Departement</h4></td>
+										<td>{{ user.departement }}</td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
-						<table>
-							<tbody>
-								<tr>
-									<td><i class='bx bx-envelope'></i>
-									<h4>Email</h4></td>
-									<td>ahmedaminn@gmail.com</td>
-	
-								</tr>
-								<tr>
-									<td><i class='bx bxl-discord-alt'></i>
-										<h4>Discord</h4></td>
-
-									<td>ahmed6aminn</td>
-	
-								</tr>
-								<tr>
-									<td><i class='bx bx-briefcase'></i>
-										<h4>Skills</h4></td>
-									<td><ol>
-										<li>video editing</li>
-										<li>web dev</li>
-										<li>game dev</li>
-									</ol></td>
-	
-								</tr>
-	
-								<tr>
-									<td><i class='bx bx-grid-alt'></i>
-										<h4>Departement</h4></td>
-									<td>Devlopement</td>
-	
-								</tr>
-	
-							</tbody>
-						</table>
+						<div class="My-Bio">
+							<div class="head">
+								<h3>My Bio</h3>
+								<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Error eius quibusdam vel cupiditate tenetur dolore ut sapiente, voluptates corrupti laboriosam aspernatur eum ipsam cumque officia blanditiis!</p>
+							</div>
+						</div>
 					</div>
-					<div class="My-Bio">
-						<div class="head">
-							<h3>My Bio</h3>
-							<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Error eius quibusdam vel cupiditate tenetur dolore ut sapiente, voluptates corrupti laboriosam aspernatur eum ipsam cumque officia blanditiis!</p>
-
-					</div>
-					
 				</div>
-
 			</div>
+
+			<form id="editProfileForm" style="display: none;" action="{{ url_for('profile') }}" method="POST">
+				<!-- Add input fields for editing profile information -->
+				<label for="editEmail">Email:</label>
+				<input type="text" id="editEmail" name="editEmail" value="{{ user.email }}">
+				<label for="editDiscord">Discord:</label>
+				<input type="text" id="editDiscord" name="editDiscord" value="{{ user.discord }}">
+				<label for="editSkills">Skills:</label>
+				<input type="text" id="editSkills" name="editSkills" value="{{ user.skills }}">
+				<label for="editDepartement">Departement:</label>
+				<input type="text" id="editDepartement" name="editDepartement" value="{{ user.departement }}">
+				<!-- Add more fields as needed -->
+
+				<button type="button" onclick="cancelEditProfile()">Cancel</button>
+				<button type="submit">Submit</button>
+			</form>
+
+			<script>
+				document.getElementById('editProfileBtn').addEventListener('click', function() {
+					document.getElementById('profileInfo').style.display = 'none';
+					document.getElementById('editProfileForm').style.display = 'block';
+				});
+
+				function cancelEditProfile() {
+					document.getElementById('profileInfo').style.display = 'block';
+					document.getElementById('editProfileForm').style.display = 'none';
+				}
+			</script>
 		</main>
 		<!-- MAIN -->
+
+		
+
+
+		
 	</section>
 	<!-- NAVBAR -->
 

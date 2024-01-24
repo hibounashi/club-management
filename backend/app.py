@@ -46,8 +46,15 @@ def signup():
 
         # Insert data into the Member table
         cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO Member (fname, lname, dob, gender, discord, email, password, school_year, university, skills, departement) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
-                    (fname, lname, dob, gender, discord, email, password, school_year, university, skills, departement))
+        query = """
+    INSERT INTO Member (
+        fname, lname, dob, gender, discord, email, password, school_year, university, skills, departement
+    ) VALUES (
+        %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, (SELECT departementName FROM Departement WHERE departementName = %s)
+    )
+"""
+        cur.execute(query, (fname, lname, dob, gender, discord, email, password, school_year, university, skills, departement))
+
         mysql.connection.commit()
         cur.close()
 
@@ -70,7 +77,6 @@ def login():
             # use session for the after login process
             session['member_id'] = user['memberID']
             session['member_email'] = user['email']
-            print("Role from database:", user['role'])
             if user['role'] == 'Manager':
                 return redirect(url_for('dashboard'))
             else:
@@ -81,6 +87,7 @@ def login():
 def logout():
     session.pop('member_id', None)
     session.pop('member_email', None)
+    session.clear()
     return redirect(url_for('login'))
 
 @app.route('/dashboard')
@@ -125,9 +132,54 @@ def user_home():
         return redirect(url_for('login'))
     else:
         return render_template('home_user.html')
-@app.route('/profile')
+@app.route('/profile', methods=['GET', 'POST'])
 def profile():
-    return render_template('user_profile.html')
+    if 'member_id' not in session:
+        return redirect(url_for('login'))
+    else:
+        cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cur.execute("SELECT * FROM Member WHERE memberID = %s", (session['member_id'],))
+        user = cur.fetchone()
+        print("parttttttttt one")
+        if request.method == 'POST':
+            print("it workkkkkkkkkkkkkkkkkkkkkkkkk")
+            new_email = request.form['editEmail']
+            new_discord = request.form['editDiscord']
+            new_skills = request.form['editSkills']
+            new_departement = request.form['editDepartement']
+            
+            cur = mysql.connection.cursor()
+            query = """
+                UPDATE Member
+                SET email = %s, discord = %s, skills = %s, departement = (SELECT departementName FROM Departement WHERE departementName = %s)
+                WHERE memberID = %s
+            """
+            cur.execute(query, (new_email, new_discord, new_skills, new_departement, session['member_id']))
 
+
+            mysql.connection.commit()
+            cur.close()
+            return render_template(
+            'user_profile.html', user = user)
+        cur.close()
+        return render_template(
+            'user_profile.html',user = user)
+
+@app.route('/delete_user', methods=['POST', 'DELETE'])
+def delete_user_profile():
+    print('yes mechat')
+    if 'member_id' not in session:
+        return redirect(url_for('login'))
+    else:
+        if request.form['_method'] == 'DELETE':
+            cur = mysql.connection.cursor()
+            cur.execute("DELETE FROM Member WHERE memberID = %s", (session['member_id'],))
+            mysql.connection.commit()
+            cur.close()
+            session.clear()  
+            return redirect(url_for('login'))
+        else:
+            return 'there are error try again'
+        
 if __name__ == '__main__':
     app.run(debug=True)
