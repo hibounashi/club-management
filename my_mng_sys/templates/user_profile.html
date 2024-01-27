@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-	<link rel="stylesheet" href="user_profile.css">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/user_profile.css') }}">
 	<title>AdminSite</title>
 </head>
 <body>
@@ -185,6 +185,6 @@
 	<!-- NAVBAR -->
 
 	<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-	<script src="user_profile.js"></script>
+	<script src="{{ url_for('static', filename='js/user_profile.js') }}"></script> 
 </body>
 </html>

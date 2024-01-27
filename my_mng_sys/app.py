@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 from datetime import datetime
 
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/club_management'# Replace with your MySQL database URI
 db = SQLAlchemy(app)
@@ -40,14 +41,29 @@ def home():
     sql_query = text("""
         SELECT * FROM Member
     """)
-    result = db.engine.execute(sql_query)
+    result = db.session.execute(sql_query)  # Use db.session.execute instead of db.engine.execute
     
-    # Convert the result to a list of dictionaries
-    members = [dict(row) for row in result]
+    # Fetch all rows as a list of tuples
+    rows = result.fetchall()
+
+    # Get the column names from the result object
+    columns = result.keys()
+
+    # Convert rows to dictionaries
+    members = [dict(zip(columns, row)) for row in rows]
 
     # Pass the members data and the calculate_age function to the template
     return render_template('home.html', members=members, calculate_age=calculate_age)
 
+
+
+@app.route('/delete_member/<int:member_id>', methods=['POST'])
+def delete_member(member_id):
+    member = Member.query.get(member_id)
+    if member:
+        db.session.delete(member)
+        db.session.commit()
+    return redirect(url_for('home'))
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -89,6 +105,11 @@ def signup():
         db.session.commit()
         #return redirect(url_for('home'))
     return render_template('signup.html')
+
+
+@app.route('/user_profile')
+def user_profile():
+    return render_template('user_profile.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
