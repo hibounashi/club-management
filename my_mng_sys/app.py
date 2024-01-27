@@ -4,7 +4,7 @@ from sqlalchemy import text
 from datetime import datetime
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/club_management'# Replace with your MySQL database URI
 db = SQLAlchemy(app)
 
