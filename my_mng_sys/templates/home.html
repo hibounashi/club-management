@@ -149,7 +149,7 @@
 								{% for member in members %}
 								<tr>
 									<td>
-										<img src="img/people.png">
+										<img src="{{ url_for('static', filename='img/people.png') }}" alt="Your Image">
 										<p>{{ member.memeberName }} {{ member.memeberLastName }}</p>
 									</td>
 									<td>{{ member.email }}</td>
@@ -159,7 +159,7 @@
 									<td>{{ calculate_age(member.Dob) }}</td>
 									<td>
 										<a href="" class=""><i class='bx bx-edit-alt'></i></a>
-										
+
 										<form action="{{ url_for('delete_member', member_id=member.memberID) }}" method="post" onsubmit="return confirm('Are you sure you want to delete this member?')">
 											<button type="submit" class="delete-btn"><i class='bx bx-trash'></i></button>
 										</form>
