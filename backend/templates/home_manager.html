@@ -23,10 +23,10 @@
 			<li><a href="#" class="active"><i class='bx bxs-dashboard icon' ></i> Dashboard</a></li>
 			<li class="divider" data-text="main">Quick Access</li>
 			
-			<li><a href="#"><i class='bx bxs-chart icon' ></i> Dashboard</a></li>
+			<li><a href="{{ url_for('dashboard') }}"><i class='bx bxs-chart icon' ></i> Dashboard</a></li>
 			<li><a href="#"><i class='bx bxs-widget icon' ></i> Departements</a></li>
 			<li><a href="#"><i class='bx bxs-widget icon' ></i> Members</a></li>
-			<li><a href="#"><i class='bx bxs-widget icon' ></i> Events</a></li>
+			<li><a href="{{ url_for('event_management') }}"><i class='bx bxs-widget icon' ></i> Events</a></li>
 			
 		</ul>
 		<div class="ads">
@@ -275,10 +275,10 @@
 		<div class="footer-col">
 		  <h4>Home</h4>
 		  <ul>
-			<li><a href="#">Dashboard</a></li>
+			<li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
 			<li><a href="#">Departements</a></li>
 			<li><a href="#">Members</a></li>
-			<li><a href="#">Events</a></li>
+			<li><a href="{{ url_for('event_management') }}">Events</a></li>
 		  </ul>
 		</div>
 		<div class="footer-col">

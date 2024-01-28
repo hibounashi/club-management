@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+   <html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <!--=============== REMIXICONS ===============-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" crossorigin="">
+      <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+      <!--=============== SWIPER CSS ===============-->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/swiper-bundle.min.css') }}">
+
+      <!--=============== CSS ===============-->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+      <title>Home</title>
+   </head>
+   <body>
+
+<!-- navbar -->
+<nav>
+   <a href="{{ url_for('user_home') }}">Home</a>
+   <a href="{{ url_for('profile_user') }}">profile</a>
+   <a href="{{ url_for('logout') }}">logout</a>
+
+</nav>
+      <!--  header  -->
+      <section class="event-intro">
+<h2 class="events-title"> Our club events</h2>
+<p class="event-p">Here are our events that we provide for the next month , scroll and check them for more information</p>
+      </section>
+      <!--  -->
+      <section class="container">
+         <div class="card__container swiper">
+            <div class="card__content">
+               <div class="swiper-wrapper">
+                     <article class="card__article swiper-slide">
+                        <div class="card__data">
+                           
+                           <form method="post" action="{{ url_for('user_home') }}">
+                              <input type="hidden" name="event_name" value="Hackathon">
+                              <h3 class="card__name">Hackathon</h3>
+                              <p class="card__description">
+                                    Engage in a coding marathon at our Hackathon event. Collaborate with peers and build innovative solutions to real-world problems.
+                              </p>
+                              <div class="button-container">
+                                    <a href="#" class="card__button">View More</a>
+                                    <button type="submit" value="submit" class="join-button" onclick="handleJoinClick(this)">Join</button>
+                              </div>
+                           </form>
+                           
+                        </div>
+                     </article>
+                     
+                  <article class="card__article swiper-slide">
+   
+                     <div class="card__data">
+                        {% if success %}
+                        <h3 class="card__name">Event joined successfully!</h3> 
+                        {% else %}
+
+                        <form method="post" action="{{ url_for('user_home') }}">
+                        <input type="hidden" name="event_name" value="Design Lab">
+                        <h3 class="card__name">Design Lab</h3>
+                        <p class="card__description">
+                           Explore the intersection of creativity and technology in our Design Lab event. Unleash your design skills and create stunning digital experiences.
+                        </p>
+   
+                        <div class="button-container">
+                           <a href="#" class="card__button">View More</a>
+                           <button type="submit" value="submit" class="join-button" onclick="handleJoinClick(this)">Join</button>
+                        </div>
+                        </form>
+                        {% endif %}
+                     </div>
+                  </article>
+               
+                  <article class="card__article swiper-slide">
+                        <div class="card__data">
+                        
+                           <form method="post" action="{{ url_for('user_home') }}">
+                              <input type="hidden" name="event_name" value="Chess Tournament">
+                              <h3 class="card__name">Chess Tournament</h3>
+                              <p class="card__description">
+                                    Join us for an intense Chess Tournament. Sharpen your strategic thinking and compete with fellow chess enthusiasts.
+                              </p>
+                              <div class="button-container">
+                                    <a href="#" class="card__button">View More</a>
+                                    <button type="submit" value="submit" class="join-button" onclick="handleJoinClick(this)">Join</button>
+                              </div>
+                           </form>
+                           
+                        </div>
+                  </article>
+
+                  <article class="card__article swiper-slide">
+                  
+                     <div class="card__data">
+                        <h3 class="card__name">Ideathon</h3>
+                        <p class="card__description">
+                           Participate in our Ideathon where creativity meets innovation. Collaborate with like-minded individuals, brainstorm ideas, and bring your visions to life.
+                        </p>
+                  
+                        <div class="button-container">
+                           <a href="#" class="card__button">View More</a>
+                           <a href="#" class="join-button">Join</a>
+                        </div>
+                     </div>
+                  </article>
+
+                     <article class="card__article swiper-slide">
+                        <div class="card__data">
+                           {% if success %}
+                           <h3 class="card__name">Event joined successfully!</h3> 
+                           {% else %}
+                           <form method="post" action="{{ url_for('user_home') }}">
+                              <input type="hidden" name="event_name" value="Datathon">
+                              <h3 class="card__name">Datathon</h3>
+                              <p class="card__description">
+                                    Explore the intersection of data and innovation in our Datathon event. Collaborate with peers and unlock insights from datasets to solve real-world challenges.
+                              </p>
+                              <div class="button-container">
+                                    <a href="#" class="card__button">View More</a>
+                                    <button type="submit" value="submit" class="join-button" onclick="handleJoinClick(this)">Join</button>
+                              </div>
+                           </form>
+                           {% endif %}
+                        </div>
+                  </article>
+                  
+                     <article class="card__article swiper-slide">
+                        <div class="card__data">
+                           
+                           <form method="post" action="{{ url_for('user_home') }}">
+                              <input type="hidden" name="event_name" value="Security Event">
+                              <h3 class="card__name">Security Event</h3>
+                              <p class="card__description">
+                                    Dive into the world of cybersecurity at our Security Event. Learn about the latest trends, practices, and technologies to safeguard digital environments from potential threats.
+                              </p>
+                              <div class="button-container">
+                                    <a href="#" class="card__button">View More</a>
+                                    <button type="submit" value="submit" class="join-button" onclick="handleJoinClick(this)">Join</button>
+                              </div>
+                           </form>
+                           
+                        </div>
+                  </article>
+                  
+                  
+   
+               </div>
+            </div>
+   
+
+            <!-- Navigation buttons -->
+            <div class="swiper-button-next">
+               <i class="ri-arrow-right-s-line"></i>
+            </div>
+            
+            <div class="swiper-button-prev">
+               <i class="ri-arrow-left-s-line"></i>
+            </div>
+
+            <!-- Pagination -->
+            <div class="swiper-pagination"></div>
+         </div>
+      </section>
+
+      <!-- fooooooooooooooooooooooooooooooterrrrrrrrrrrrrrrrrrrr -->
+       <!-- footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="footer-col">
+            <h4>Home</h4>
+            <ul>
+              <li><a href="#">Dashboard</a></li>
+              <li><a href="#">Departements</a></li>
+              <li><a href="#">Members</a></li>
+              <li><a href="#">Events</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Links</h4>
+            <ul>
+              <li><a href="#">Bejaia, Algeria</a></li>
+              <li><a href="#">+1.555.555.5555 </a></li>
+              <li><a href="#">support@company.com</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>About us</h4>
+            <ul>
+              <li><a href="#">Lorem ipsum dolor sit, amet consectetur adipisicing elit.  accusantium dicta praesentium veritatis earum, voluptatem excepturi necessitatibus dolores aut libero. Aperiam omnis excepturi tempora veniam ut delectus?</a></li>
+
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Siga</h4>
+            <div class="social-links">
+              <a href="https://www.twitter.com" target="_blank"
+                ><i class="fa-brands fa-x-twitter"></i></a
+              ><!-- icone x (twitter) -->
+              <a href="https://www.instagram.com" target="_blank"
+                ><i class="fab fa-instagram"></i></a
+              ><!-- icone instagram -->
+              <a href="https://www.linkedin.com" target="_blank"
+                ><i class="fab fa-linkedin-in"></i></a
+              ><!-- icone linkedin -->
+              <a href="https://www.github.com" target="_blank"
+                ><i class="fa-brands fa-github"></i></a
+              ><!-- icone github -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- footer -->
+    <div class="copyright">
+      <p>Houda , Hiba , Manel - 2024</p>
+    </div>
+      
+      <!--=============== SWIPER JS ===============-->
+      <script src="{{ url_for('static', filename='js/swiper-bundle.min.js') }}"></script>
+
+      <!--=============== MAIN JS ===============-->
+      <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+      <script>
+         function handleJoinClick(button) {
+            button.innerText = "Successful Joining";
+         }
+         </script>
+   </body>
+</html>
