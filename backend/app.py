@@ -111,7 +111,7 @@ def dashboard():
         cur.execute("SELECT COUNT(*) AS user_count FROM Member")
         user_count = cur.fetchone()['user_count']
         #the percentage 
-        total_users = 250 #retrive it from discord server
+        total_users = 50 #retrive it from discord server
         registration_percentage = (user_count / total_users) * 100
         #count the total number of events
         cur.execute("SELECT COUNT(*) AS event_count FROM club_event")
