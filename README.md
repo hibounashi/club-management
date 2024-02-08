@@ -24,7 +24,7 @@
 
 ## Demo
 
-Check out the live demo [here](#). *(Link to be updated)*
+Check out the live demo [here](#). *(coming soon)*
 ![App Screenshot](/screenshot.png)
 
 ## Contributing
