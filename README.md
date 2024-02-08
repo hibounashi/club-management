@@ -25,6 +25,7 @@
 ## Demo
 
 Check out the live demo [here](#). *(Link to be updated)*
+![App Screenshot](/screenshot.png)
 
 ## Contributing
 
