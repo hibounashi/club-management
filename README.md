@@ -24,7 +24,7 @@
 
 ## Demo
 
-Check out the live demo [here](https://hibounacci.pythonanywhere.com/login). *(coming soon)* </br>
+Check out the live demo  [here](https://hibounacci.pythonanywhere.com/login). *(first virsion)* </br>
 ![App Screenshot](/screenshot.png)
 
 ## Contributing
